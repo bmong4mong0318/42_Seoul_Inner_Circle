@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:23:33 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/03 11:20:35 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/04 17:51:15 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ size_t	ft_putstr(const char *s, t_tag *tag)
 			write(1, &null_str[i++], 1);
 			tag->cnt++;
 			tag->precision--;
+			tag->field_width--;
 		}
 		return (0);
 	}

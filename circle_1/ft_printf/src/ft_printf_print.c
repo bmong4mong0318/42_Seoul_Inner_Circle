@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 16:50:19 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/03 20:47:19 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/04 17:18:54 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ void	ft_put_num(long long num, t_tag	*tag)
 	locase = (tag->flags & SMALL);
 	if (tag->flags & LEFT)
 		tag->flags &= ~ZEROPAD;
-	if (tag->flags & SPECIAL)
-		tag->field_width -= 2;
+	// if (tag->flags & SPECIAL)
+	// 	tag->field_width -= 2;
 	if (num < 0)
 	{
 		num = -num;
 		tag->flags |= SIGN;
-		// tag->field_width--;
+		tag->field_width--;
 	}
 	num_mem = num;
 	if (num == 0)
@@ -92,17 +92,25 @@ void	ft_put_num(long long num, t_tag	*tag)
 	else
 		while (num != 0)
 			tmp[tag->base_len++] = (digits[do_div(&num, tag->base)] | locase);
+	// printf("\nbl:%d:\n", tag->base_len);
+	// printf("\nprec:%d:\n", tag->precision);
 	if (tag->base_len > tag->precision)
 		tag->precision = tag->base_len;
-	tag->field_width -= tag->precision;
+	if (tag->precision != -1)
+		tag->field_width -= tag->precision;
 	print_num(tag, num_mem, tag->field_width, tmp);
 }
 
 static void	print_num(t_tag *tag, long long num, int width, char *tmp)
 {
-	if (check_sign(tag)
+	if ((check_sign(tag) && !(tag->flags & LEFT) && (tag->flags & ZEROPAD))
 		|| (num == 0 && (tag->preczero == 2)))
-		width--;
+			width--;
+	else if (check_sign(tag) || tag->preczero == 2)
+	{
+		if (check_sign(tag))
+			width--;
+	}
 	if (num == 0 && (tag->flag_prec || tag->flags & ZEROPAD))
 		width++;
 	if (!(tag->flags & (ZEROPAD + LEFT)))
@@ -133,6 +141,11 @@ static void	print_num(t_tag *tag, long long num, int width, char *tmp)
 	{
 		tag->base_len--;
 		ft_putchar_int(tmp[tag->base_len], tag);
+	}
+	if (check_sign(tag) && (tag->flags & LEFT))
+	{
+		if (!(tag->flags & SIGN))
+			width--;
 	}
 	while (width-- > 0)
 		ft_putchar_int(' ', tag);

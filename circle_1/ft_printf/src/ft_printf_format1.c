@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:43:55 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/03 17:27:03 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/04 18:21:18 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,29 @@ void	ft_format_c(va_list ap, t_tag *tag)
 	}
 }
 
+
 void	ft_format_s(va_list ap, t_tag *tag)
 {
 	char	*str;
 
 	str = va_arg(ap, char *);
 	tag->prec_len = ft_strnlen(str, tag);
-	if (str == 0 && (tag->flags & LEFT) && tag->precision <= 6)
-		tag->field_width -= tag->precision;
-	else if (str == 0 && (tag->flags & LEFT) && tag->precision > 6)
-		tag->field_width -= (tag->precision - 5);
-	if (str == 0 && tag->field_width <= 6
-		&& tag->precision && !(tag->flags & LEFT))
-		tag->field_width = 0;
-	else if (str == 0 && tag->flag_width && !tag->flag_prec)
-		tag->field_width -= 6;
-	else if (str == 0 && tag->field_width > 6 && tag->precision <= 6)
-		tag->field_width -= tag->precision;
-	else if (str == 0 && tag->field_width > 6 && tag->precision > 6)
-		tag->field_width -= 6;
+	// if (str == 0 && (tag->flags & LEFT) && tag->precision <= 6)
+	// 	tag->field_width -= tag->precision;
+	// else if (str == 0 && (tag->flags & LEFT) && tag->precision > 6)
+	// 	tag->field_width -= (tag->precision - 5);
+	// if (str == 0 && tag->field_width <= 6
+	// 	&& tag->precision && !(tag->flags & LEFT))
+	// 	tag->field_width = 0;
+	// else if (str == 0 && tag->flag_width && !tag->flag_prec)
+	// 	tag->field_width -= 6;
+	// else if (str == 0 && tag->field_width > 6 && tag->precision <= 6)
+	// 	tag->field_width -= tag->precision;
+	// else if (str == 0 && tag->field_width > 6 && tag->precision > 6)
+	// 	tag->field_width -= 6;
+	// printf("\nfw:%d\n", tag->field_width);
+	if (str == 0 && !(tag->flags & LEFT))
+		tag->field_width -= check_null_size(str, tag);
 	if (!(tag->flags & LEFT))
 	{
 		while (tag->prec_len < tag->field_width--)

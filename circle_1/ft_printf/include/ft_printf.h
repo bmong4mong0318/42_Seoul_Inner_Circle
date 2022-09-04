@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:56:37 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/03 14:10:08 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/04 18:11:12 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_tag
 	int			base_len;
 	int			prec_len;
 	int			base;
-	int 		preczero;
+	int			preczero;
 	int			precin;
 	int			flag_final;
 }				t_tag;
@@ -63,6 +63,7 @@ void			ft_format_percent(va_list ap, t_tag *tag);
 ------------------------*/
 size_t			ft_strnlen(const char *s, t_tag *tag);
 void			check_percent(char *str, t_tag *tag);
+int				check_null_size(const char *s, t_tag *tag);
 
 /*------------------------
 	   put_functions

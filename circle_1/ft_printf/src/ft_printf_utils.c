@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:23:06 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/02 11:06:02 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/04 18:21:03 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,16 @@ void	check_percent(char *str, t_tag *tag)
 			str++;
 		}
 	}
+}
+
+int	check_null_size(const char *s, t_tag *tag)
+{
+	int	i;
+
+	i = tag->precision;
+	if (tag->precision == 0)
+		return (0);
+	while (i < 6)
+		i++;
+	return (i);
 }

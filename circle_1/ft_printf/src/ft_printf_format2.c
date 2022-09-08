@@ -6,50 +6,56 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:44:08 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/03 19:33:53 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/08 20:41:16 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_format_i(va_list ap, t_tag *tag)
+char	*ft_format_i(char *buf, va_list ap, t_tag *tag)
 {
-	ft_put_num(va_arg(ap, int), tag);
+	tag->flags |= SIGN;
+	buf = fill_num(buf, va_arg(ap, int), tag);
+	return (buf);
 }
 
-void	ft_format_u(va_list ap, t_tag *tag)
+char	*ft_format_u(char *buf, va_list ap, t_tag *tag)
 {
-	ft_put_num(va_arg(ap, unsigned int), tag);
+	buf = fill_num(buf, va_arg(ap, unsigned int), tag);
+	return (buf);
 }
 
-void	ft_format_lowerx(va_list ap, t_tag *tag)
+char	*ft_format_lowerx(char *buf, va_list ap, t_tag *tag)
 {
 	tag->base = 16;
 	tag->flags |= SMALL;
-	ft_put_num(va_arg(ap, unsigned long), tag);
+	buf = fill_hex(buf, va_arg(ap, unsigned int), tag);
+	return (buf);
 }
 
-void	ft_format_upperx(va_list ap, t_tag *tag)
+char	*ft_format_upperx(char *buf, va_list ap, t_tag *tag)
 {
 	tag->base = 16;
-	ft_put_num(va_arg(ap, unsigned long), tag);
+	buf = fill_hex(buf, va_arg(ap, unsigned int), tag);
+	return (buf);
 }
 
-void	ft_format_percent(va_list ap, t_tag *tag)
+char	*ft_format_percent(char *buf, va_list ap, t_tag *tag)
 {
-	// int	width;
-
 	(void)ap;
-	// width = tag->field_width;
-	// if (!(tag->flags & LEFT))
-	// {
-	// 	while (--width)
-	// 	{
-	// 		if (tag->flags & ZEROPAD)
-	// 			ft_putchar_int('0', tag);
-	// 		else if (!(tag->flags & ZEROPAD))
-	// 			ft_putchar_int(' ', tag);
-	// 	}
-	// }
-	ft_putchar_int('%', tag);
+	tag->size = tag->field_width - 1;
+	if (!(tag->flags & LEFT))
+	{
+		while (tag->size-- > 0)
+		{
+			if (tag->flags & ZEROPAD)
+				*buf++ = '0';
+			else
+				*buf++ = ' ';
+		}
+	}
+	*buf++ = '%';
+	while (tag->size-- > 0)
+		*buf++ = ' ';
+	return (buf);
 }

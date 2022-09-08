@@ -6,7 +6,7 @@
 #    By: dayun <dayun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 15:28:39 by dayun             #+#    #+#              #
-#    Updated: 2022/09/02 14:38:29 by dayun            ###   ########.fr        #
+#    Updated: 2022/09/07 17:06:42 by dayun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ ARC 		= ar rcus
 
 #Sources
 SRC_FILES	=	ft_printf_main \
-				ft_printf_print ft_printf_put \
-				ft_printf_ptr ft_printf_utils \
+				ft_printf_print ft_printf_hex ft_printf_utils \
 				ft_printf_format1 ft_printf_format2
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

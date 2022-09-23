@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thomas <thomas@student.42.fr>              +#+  +:+       +#+         #
+#    By: dayun <dayun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/16 17:43:42 by dayun             #+#    #+#              #
-#    Updated: 2022/08/19 09:12:41 by thomas           ###   ########.fr        #
+#    Updated: 2022/07/21 17:06:14 by dayun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: 
-	$(MAKE) fclean 
+	$(MAKE) clean 
 	$(MAKE) all
 
 .PHONY: all bonus clean fclean re

@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_main.c                                   :+:      :+:    :+:   */
+/*   ft_printf_main_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:44:20 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/08 20:43:04 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:26:42 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/ft_printf_bonus.h"
 
-static char	*parse_spc(char *buf, va_list ap, const char *fmt, t_tag *tag)
+char	*parse_spc(char *buf, va_list ap, const char *fmt, t_tag *tag)
 {
 	if (*fmt == 'c')
-		return (ft_format_c(buf, ap, tag));
+		buf = ft_format_c(buf, ap, tag);
 	else if (*fmt == 's')
-		return (ft_format_s(buf, ap, tag));
+		buf = ft_format_s(buf, ap, tag);
 	else if (*fmt == 'd')
-		return (ft_format_d(buf, ap, tag));
+		buf = ft_format_d(buf, ap, tag);
 	else if (*fmt == 'i')
-		return (ft_format_i(buf, ap, tag));
+		buf = ft_format_i(buf, ap, tag);
 	else if (*fmt == 'u')
-		return (ft_format_u(buf, ap, tag));
+		buf = ft_format_u(buf, ap, tag);
 	else if (*fmt == 'p')
-		return (ft_format_p(buf, ap, tag));
+		buf = ft_format_p(buf, ap, tag);
 	else if (*fmt == 'x')
-		return (ft_format_lowerx(buf, ap, tag));
+		buf = ft_format_lowerx(buf, ap, tag);
 	else if (*fmt == 'X')
-		return (ft_format_upperx(buf, ap, tag));
+		buf = ft_format_upperx(buf, ap, tag);
 	else if (*fmt == '%')
-		return (ft_format_percent(buf, ap, tag));
-	else
+		buf = ft_format_percent(buf, ap, tag);
+	if (!buf)
 		return (0);
+	return (buf);
 }
 
-static void	check_flags(va_list ap, const char *fmt, t_tag *tag)
+void	check_flags(va_list ap, const char *fmt, t_tag *tag)
 {
+	(void)ap;
 	if (*fmt == '-')
 		tag->flags |= LEFT;
 	else if (*fmt == '+')
@@ -64,7 +66,7 @@ static void	check_flags(va_list ap, const char *fmt, t_tag *tag)
 		tag->precision = tag->precision * 10 + *fmt - '0';
 }
 
-static void	init_tag(t_tag *tag)
+void	init_tag(t_tag *tag)
 {
 	tag->sign = 0;
 	tag->flags = 0;
@@ -79,11 +81,8 @@ static void	init_tag(t_tag *tag)
 	tag->flag_c = 0;
 }
 
-static int	parse_buf(char *buf, va_list ap, const char *fmt, t_tag *tag)
+int	parse_buf(char *buf, va_list ap, const char *fmt, t_tag *tag)
 {
-	char	*tmp;
-
-	tmp = buf;
 	while (*fmt)
 	{
 		if (*fmt == '%')
@@ -94,27 +93,33 @@ static int	parse_buf(char *buf, va_list ap, const char *fmt, t_tag *tag)
 			if (tag->precision < 0)
 				tag->precision = 0;
 			buf = parse_spc(buf, ap, fmt, tag);
+			if (!buf)
+				return (-1);
 		}
 		else
-			*buf++ = *fmt;
+		{
+			buf = fill_buf(buf, *fmt, tag);
+			if (!buf)
+				return (-1);
+		}
 		fmt++;
 	}
-	*buf = '\0';
-	return (buf - tmp);
+	return (0);
 }
 
 int	ft_printf(const char *fmt, ...)
 {
 	va_list	ap;
 	t_tag	tag;
-	char	buf[1024];
-	int		print_len;
+	char	buf[100000];
 
 	va_start(ap, fmt);
-	ft_memset(buf, 0, 1024);
-	print_len = parse_buf(buf, ap, fmt, &tag);
-	va_end(ap);
-	if (print_buf(buf, print_len) == -1)
+	ft_memset(buf, 0, 100000);
+	tag.cnt = 0;
+	if (parse_buf(buf, ap, fmt, &tag) == -1)
 		return (-1);
-	return (print_len);
+	va_end(ap);
+	if (print_buf(buf, tag.cnt) == -1)
+		return (-1);
+	return (tag.cnt);
 }

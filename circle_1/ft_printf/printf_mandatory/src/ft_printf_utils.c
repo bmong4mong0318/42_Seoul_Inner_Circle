@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:23:06 by dayun             #+#    #+#             */
-/*   Updated: 2022/09/08 20:16:09 by dayun            ###   ########.fr       */
+/*   Updated: 2022/09/23 16:01:37 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ size_t	ft_strnlen(const char *s, t_tag *tag)
 	}
 }
 
-int	check_null_size(const char *s, t_tag *tag)
+int	check_null_size(t_tag *tag)
 {
 	int	i;
 

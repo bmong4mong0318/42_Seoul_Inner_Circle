@@ -6,7 +6,7 @@
 #    By: dayun <dayun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/25 15:28:39 by dayun             #+#    #+#              #
-#    Updated: 2022/09/23 16:03:58 by dayun            ###   ########.fr        #
+#    Updated: 2022/09/24 09:21:21 by dayun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC_FILES		=	ft_printf_main \
 					ft_printf_print ft_printf_hex ft_printf_utils ft_printf_utils2
 SRC_BONUS_FILES	=	ft_printf_main_bonus \
 					ft_printf_format1_bonus ft_printf_format2_bonus ft_printf_format3_bonus\
-					ft_printf_print_bonus ft_printf_hex_bonus ft_printf_utils_bonus ft_printf_utils2_bonus
+					ft_printf_print_bonus ft_printf_hex_bonus ft_printf_utils1_bonus ft_printf_utils2_bonus
 SRC 			= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 			= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 SRC_BONUS 		= 	$(addprefix $(SRC_BONUS_DIR), $(addsuffix .c, $(SRC_BONUS_FILES)))

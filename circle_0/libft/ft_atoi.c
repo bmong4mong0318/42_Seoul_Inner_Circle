@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 19:23:02 by dayun             #+#    #+#             */
-/*   Updated: 2022/07/17 14:57:35 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/05 16:19:47 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_error(const char *s)
 	return (1);
 }
 
-int	ft_atoi(const char *s)
+long	ft_atoi(const char *s)
 {
 	long	plma;
 	long	ans;

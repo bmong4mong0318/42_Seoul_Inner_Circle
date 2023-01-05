@@ -14,6 +14,8 @@
 
 ## Circle_2
 
+- pipex
+
 - push_swap
 
-- pipex
+

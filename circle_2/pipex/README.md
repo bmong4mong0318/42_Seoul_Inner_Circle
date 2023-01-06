@@ -1,6 +1,6 @@
 # study allowed functions
 
-- open
+- `open`: 파일을 사용하기 위해 열기(open)합니다.
 ```c
 헤더: fcntl.h
 형태: int open (const char *FILENAME, int FLAGS[, mode_t MODE])
@@ -14,8 +14,9 @@
   
 예시: fd = open( "./test.txt", O_WRONLY | O_CREAT | O_EXCL, 0644)
  ```
-- close
+- `close`: open()으로 열었던 파일을 닫아주는 함수입니다.
 ```c
+
 헤더: nistd.h
 형태: int close(int fd)
 인수: int fd 닫고자 하는 파일의 파일 디스크립터
@@ -25,7 +26,16 @@
 
 예시: close(fd)
 ```
-- read
+- `read`: open() 함수로 열기한 파일의 내용을 읽기 합니다.
+```c
+  헤더: unistd.h
+  형태: ssize_t read (int fd, void *buf, size_t nbytes)
+  인수: int fd 파일 디스크립터
+  void *buf 파일을 읽어 들일 버퍼
+  size_t nbytes 퍼버의 크기
+  반환: ssize_t == -1 실패
+>  0 정상적으로 실행되었다면 읽어들인 바이트 수
+```
 
 - write
 - malloc

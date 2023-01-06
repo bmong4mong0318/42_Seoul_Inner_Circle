@@ -19,10 +19,14 @@
 헤더: nistd.h
 형태: int close(int fd)
 인수: int fd 닫고자 하는 파일의 파일 디스크립터
-    
+반환: 
+    성공 시 0 리턴
+    실패 시 -1 리턴 후 errno 설정
 
+예시: close(fd)
 ```
 - read
+
 - write
 - malloc
 - free

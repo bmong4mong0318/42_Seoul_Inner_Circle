@@ -10,7 +10,7 @@
     [, mode_t MODE]: O_CREAT 옵션 사용에 의해 파일이 생성될 때 지정되는 파일 접근 권한
 반환:
     int 0 < 파일 열기에 성공하면 파일 디스크립터의 양의 정수 값 반환
-    ssize_t == -1 실패
+    int == -1 실패
   
 예시: fd = open( "./test.txt", O_WRONLY | O_CREAT | O_EXCL, 0644);
  ```
@@ -126,6 +126,7 @@ void main()
   - 시스템 콜 오류 시: -1
   - 라이브러리 함수 오류 시: NULL
 
+<br>
 
 - `perror` : 오류 메시지를 출력합니다.
 ```c
@@ -145,7 +146,7 @@ void main()
 
 예시: strerror(errno);
 ```
-
+- code example (perror, strerror)
 ```c
 #include <stdio.h>
 #include <errno.h> //가장 최근에 발생한 에러 번호는 errno 변수에 있습니다.
@@ -183,10 +184,72 @@ int main(void)
 }
 ```
 ---
-- access
+- `access` : 프로세스가 지정한 파일이 존재하는지, 읽거나 쓰거나 실행이 가능한 지를 확인하는 함수입니다. 만일 지정한 파일이 심볼릭 링크라면 링크의 원본을 체크합니다.
+```c
+헤더: unistd.h
+형태: int access(const char *pathname, int mode);
+인수:
+    char *pathname: 파일이나 디렉토리 전체 이름
+    int mode: 검사할 내용
+반환:
+    0 == 가능 또는 파일이 존재
+    -1 == mode 에 대해 하나 이상 거절되었거나 에러가 있음. 자세한 내용은 errno에 세팅
 
-- dup
-- dup2
+예시: access(file_name, R_OK ¦ W_OK);
+```
+- code example (access)
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main( void)
+{
+   char *file_name = "./test.c";
+
+   if ( 0 == access( file_name, F_OK)){
+      printf( "%s 파일이 있습니다.\n", file_name);
+      
+      if ( 0 == access( file_name, R_OK ¦ W_OK)){
+         printf( "읽거나 쓰기가 가능합니다.\n");
+      } else {
+         printf( "읽지 못하거나 내용을 변경할 수 없습니다.\n");
+      }
+   }
+}
+```
+---
+- `dup` : fd로 전달받은 파일 서술자를 복제하여 반환합니다.
+```c
+헤더: unistd.h
+형태: int dup(int fd);
+인수:
+    int fd: 복제 하고자하는 파일 디스크립터
+반환:
+    dup는 fd로 전달받은 파일 서술자를 복제하여 반환합니다.
+    dup가 돌려주는 파일 서술자는 가장 낮은 서술자를 반환합니다.
+    성공시 새 파일 서술자, 오류시 -1을 반환합니다.
+
+예시: dup(fd);
+```
+- `dup2` : fd로 전달받은 파일 서술자를 복제하여 반환합니다.
+```c
+헤더: unistd.h
+형태: int dup2(int fd, int fd2);
+인수:
+    int fd: 복제 하고자하는 파일 디스크립터
+    int fd2: 복제 하고자하는 파일 디스크립터
+반환:
+    dup2는 새 서술자의 값을 fd2로 지정합니다.
+    만일 fd2가 이미 열려있으면 fd2를 닫은 후 복제가 됩니다. 
+    역시 성공시 새 파일 서술자, 오류시 -1을 반환합니다.
+
+예시: dup(fd1, fd2);
+```
+- code example (dup, dup2)
+```c
+https://reakwon.tistory.com/104
+```
+
 - execve
 - exit
 - fork

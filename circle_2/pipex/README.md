@@ -24,7 +24,7 @@
     성공 시 0 리턴
     실패 시 -1 리턴 후 errno 설정
 
-예시: close(fd)
+예시: close(fd);
 ```
 - `read` : open() 함수로 열기한 파일의 내용을 읽기 합니다.
 ```c
@@ -118,19 +118,73 @@ void main()
 }
 ```
 ---
-- `perror` :
+리눅스에는 시스템콜 및 라이브러리 함수를 수행하다가 오류가 발생하면 사용자의 프로그램으로 오류 결과를 넘겨준다.
+
+사용자 프로그램에서는 함수의 리턴값을 조회함으로써 오류의 발생 여부를 확인 할 수 있다.
+
+- 참고) 일반적으로 오류 발생 시 리턴값은 다음과 같다.
+  - 시스템 콜 오류 시: -1
+  - 라이브러리 함수 오류 시: NULL
+
+
+- `perror` : 오류 메시지를 출력합니다.
 ```c
-헤더: stdlib.h
+헤더: stdio.h
 형태: void perror(const char *s);
 인수: const char *s: 오류 메시지 앞에 덧붙이고 싶은 문자열
 반환: x
 
-형태: perror("ERROR");
+예시: perror("ERROR");
+```
+- `strerror` : 오류 메시지를 출력합니다.
+```c
+헤더: string.h
+형태: void strerror(int errnum);
+인수: int errnum: 오류 메시지 앞에 덧붙이고 싶은 문자열
+반환: 오류 번호에 해당하는 오류 문자열을 가리키는 포인터
+
+예시: strerror(errno);
 ```
 
+```c
+#include <stdio.h>
+#include <errno.h> //가장 최근에 발생한 에러 번호는 errno 변수에 있습니다.
+#include <string.h>
 
-- strerror
+void ListErrorMsg()
+{
+    int i = 0;
+    char *errmsg;
+
+    printf("== Error Message List ==\n");
+    for(i=0;i<45;i++)
+    {
+        errmsg = strerror(i); //에러 메시지 확인
+        printf("<%d>:%s\n",i,errmsg); //에러 번호와 에러 메시지 출력
+    }
+}
+
+int main(void)
+{
+    FILE * fp;
+    
+    ListErrorMsg(); //에러 번호와 에러 메시지 목록 출력
+
+    printf("\n없는 파일 읽기 모드로 열었을 때의 에러 메시지 확인하기\n");
+    fp = fopen ("noexist.txt","rt");//읽기 모드로 없는 파일 열기
+    if (fp == NULL)//파일 스트림이 NULL일 때
+    {
+        perror("file not existed");//에러 메시지 출력
+        printf ("%d: %s\n",errno,strerror(errno));//에러 번호와 에러 메시지 출력
+        return 0;
+    }
+    fclose(fp);
+    return 0;
+}
+```
+---
 - access
+
 - dup
 - dup2
 - execve

@@ -250,10 +250,76 @@ int main( void)
 https://reakwon.tistory.com/104
 ```
 
-- execve
-- exit
-- fork
+- `execve` : 다른 프로그램을 실행하고 자신은 종료합니다.
+```c
+헤더: unistd.h
+형태: int execle(const char *path, const char *arg , ..., char * const envp[]);
+인수:
+	char *char: 디레토리 포함 전체 파일 명
+	const char *arg: 인수 목록
+	char * const envp[]: 환경 설정 목록
+반환: 실패일 때만 -1
+
+예시: execve( "./show_envp", argv, envp);
+```
+
+- code example (exeve)
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+   char *argv[]   = { "./show_envp", "HTTP", NULL};
+   char *envp[]   = { "HTTP=badayak.com", NULL};
+
+   execve( "./show_envp", argv, envp);
+
+   printf( "이 메시지가 보이면 지정된 프로그램이 \
+없거나 어떤 문제로 실행되지 못한 것입니다.\n");
+}
+```
+
+- `exit` :  정상적으로 프로세스를 종료합니다.
+```c
+헤더: unistd.h
+형태: void exit(int status);
+인수: 
+	int status: 호스트 환경에게 알려줄 종료 값
+	- 정상 종료시 0
+	- 에러로 인한 종료시 0이 아닌 숫자, 대체로 1
+
+반환: x
+
+예시: exit(0)
+```
+
+- `fork` : 현재 실행되는 프로세스에 대해 복사본 프로세스를 생성합니다.
+  
+  이때 원래 진행되던 프로세스는 부모 프로세스, 복사된 프로세스를 자식 프로세스라고 합니다.
+```c
+헤더: unistd.h
+형태: pid_t fork(void)
+인수: x
+반환:
+	pid_t -1 : 실패
+	0 == 자식 프로세스, 새로 생성된 프로세스임
+	0 < 생성된 자식 프로세스 PID
+```
+https://code-lab1.tistory.com/39
+
 - pipe
+```c
+``` 
+
 - unlink
+```c
+``` 
+
 - wait
+```c
+``` 
+
 - waitpid
+```c
+``` 

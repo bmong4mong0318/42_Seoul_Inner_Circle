@@ -1,9 +1,9 @@
 - [open](#open)
 - [close](#close)
-- [`read`](#read)
+- [read](#read)
 - [write](#write)
 - [malloc](#malloc)
-- [`free`](#free)
+- [free](#free)
 - [perror](#perror)
 - [strerror](#strerror)
 - [access](#access)
@@ -47,7 +47,7 @@ open()으로 열었던 파일을 닫아주는 함수입니다.
 예시: close(fd);
 ```
 
-## `read`
+## read
 open() 함수로 열기한 파일의 내용을 읽기 합니다.
 ```c
 헤더: unistd.h
@@ -112,7 +112,7 @@ int main()
 예시: int* arr = (int*)malloc(sizeof(int) * 4);
 ```
 
-## `free`
+## free
 malloc()으로 할당한 메모리를 해제합니다. 
 ```c
 헤더: stdlib.h

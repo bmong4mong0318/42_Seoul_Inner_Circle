@@ -1,23 +1,23 @@
-- [`open`](#open)
-- [`close`](#close)
+- [open](#open)
+- [close](#close)
 - [`read`](#read)
-- [`write`](#write)
-- [`malloc`](#malloc)
+- [write](#write)
+- [malloc](#malloc)
 - [`free`](#free)
-- [`perror`](#perror)
-- [`strerror`](#strerror)
-- [`access`](#access)
-- [`dup`](#dup)
-- [`dup2`](#dup2)
-- [`execve`](#execve)
-- [`exit`](#exit)
-- [`fork`](#fork)
-- [`pipe`](#pipe)
-- [`unlink`](#unlink)
-- [`wait`](#wait)
-- [`waitpid`](#waitpid)
+- [perror](#perror)
+- [strerror](#strerror)
+- [access](#access)
+- [dup](#dup)
+- [dup2](#dup2)
+- [execve](#execve)
+- [exit](#exit)
+- [fork](#fork)
+- [pipe](#pipe)
+- [unlink](#unlink)
+- [wait](#wait)
+- [waitpid](#waitpid)
 
-## `open`
+## open
 파일을 사용하기 위해 열기(open)합니다.
 ```c
 헤더: fcntl.h
@@ -33,7 +33,7 @@
 예시: fd = open( "./test.txt", O_WRONLY | O_CREAT | O_EXCL, 0644);
  ```
 
-## `close`
+## close
 open()으로 열었던 파일을 닫아주는 함수입니다.
 ```c
 
@@ -63,7 +63,7 @@ open() 함수로 열기한 파일의 내용을 읽기 합니다.
 예시: read(fd, buff, BUFF_SIZE); 
 ```
 
-## `write`
+## write
 open() 함수로 열기를 한 파일에 쓰기를 합니다.
 ```c
 헤더: unistd.h
@@ -101,7 +101,7 @@ int main()
 }
 ```
 ---
-## `malloc`
+## malloc
 메모리를 동적 할당합니다.
 ```c
 헤더: stdlib.h
@@ -155,7 +155,7 @@ void main()
 
 <br>
 
-## `perror`
+## perror
 오류 메시지를 출력합니다.
 ```c
 헤더: stdio.h
@@ -165,7 +165,7 @@ void main()
 
 예시: perror("ERROR");
 ```
-## `strerror`
+## strerror
 오류 메시지를 출력합니다.
 ```c
 헤더: string.h
@@ -213,7 +213,7 @@ int main(void)
 }
 ```
 ---
-## `access`
+## access
 프로세스가 지정한 파일이 존재하는지, 읽거나 쓰거나 실행이 가능한 지를 확인하는 함수입니다. 만일 지정한 파일이 심볼릭 링크라면 링크의 원본을 체크합니다.
 ```c
 헤더: unistd.h
@@ -248,7 +248,7 @@ int main( void)
 }
 ```
 ---
-## `dup`
+## dup
 fd로 전달받은 파일 서술자를 복제하여 반환합니다.
 ```c
 헤더: unistd.h
@@ -262,7 +262,7 @@ fd로 전달받은 파일 서술자를 복제하여 반환합니다.
 
 예시: dup(fd);
 ```
-## `dup2`
+## dup2
 fd로 전달받은 파일 서술자를 복제하여 반환합니다.
 ```c
 헤더: unistd.h
@@ -282,7 +282,7 @@ fd로 전달받은 파일 서술자를 복제하여 반환합니다.
 https://reakwon.tistory.com/104
 ```
 
-## `execve`
+## execve
 다른 프로그램을 실행하고 자신은 종료합니다.
 ```c
 헤더: unistd.h
@@ -312,7 +312,7 @@ int main()
 }
 ```
 ---
-## `exit`
+## exit
 정상적으로 프로세스를 종료합니다.
 ```c
 헤더: unistd.h
@@ -326,7 +326,7 @@ int main()
 예시: exit(0)
 ```
 
-## `fork`
+## fork
 현재 실행되는 프로세스에 대해 복사본 프로세스를 생성합니다.
   
   이때 원래 진행되던 프로세스는 부모 프로세스, 복사된 프로세스를 자식 프로세스라고 합니다.
@@ -366,7 +366,7 @@ int main(){
 
 ```
 ---
-## `pipe`
+## pipe
 프로세스 간의 통신(IPC)에서 사용하는 파이프를 생성합니다.
 ```c
 헤더: unistd.h
@@ -380,7 +380,7 @@ int main(){
 예시: pipe(fd);
 ```
 
-## `unlink`
+## unlink
 링크를 삭제합니다. 
 ```c
 헤더: unistd.h
@@ -391,7 +391,7 @@ int main(){
 예시: unlink("sample.c");
 ```
 
-## `wait`
+## wait
 자식 프로세스 작업이 끝날 때 까지 대기하며, 자식 프로세스가 종료한 상태를 구합니다.
 ```c
 헤더: wait.h
@@ -402,7 +402,7 @@ int main(){
 예시: pid_child = wait(&status);
 ```
 
-## `waitpid`
+## waitpid
 wait() 함수가 자식 프로세스 중 어느 하나라도 종료되면 복귀되지만, 즉 대기에서 풀리지만 waitpid()는 특정 자식 프로세스가 종료될 때까지 대기 합니다. 또한, wait()는 자식 프로세스가 종료될 때까지 block되지만 waitpid()는 WNOHANG 옵션을 사용하면 block되지 않고 다른 작업을 진행할 수 있습니다.
 ```c
 헤더: wait.h

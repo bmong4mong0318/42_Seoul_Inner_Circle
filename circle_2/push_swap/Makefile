@@ -6,7 +6,7 @@
 #    By: dayun <dayun@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/24 09:34:54 by dayun             #+#    #+#              #
-#    Updated: 2023/01/02 15:07:08 by dayun            ###   ########.fr        #
+#    Updated: 2023/01/10 13:34:00 by dayun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ OBJ_BONUS_DIR 	= bonus/obj/
 INC 			= mandatory/include
 INC_BONUS		= bonus/include
 DEL 			= rm -f
-ARC 			= ar rcus
 
 # Sources
 SRC_FILES		= 	push_swap \
@@ -43,10 +42,13 @@ OBJ_BONUS		= 	$(addprefix $(OBJ_BONUS_DIR), $(addsuffix .o, $(SRC_BONUS_FILES)))
 OBJF			=	create_dir
 
 ifdef	BONUS_OPT
+	NAME = $(BONUS)
+	OBJ_TOTAL = $(OBJ_BONUS)
 	O_DIR = $(OBJ_BONUS_DIR)
 	S_DIR = $(SRC_BONUS_DIR)
 	INC_FINAL = $(INC_BONUS)
 else
+	OBJ_TOTAL = $(OBJ)
 	O_DIR = $(OBJ_DIR)
 	S_DIR = $(SRC_DIR)
 	INC_FINAL = $(INC)
@@ -65,13 +67,9 @@ $(O_DIR)%.o : $(S_DIR)%.c | $(OBJF)
 $(OBJF)	:
 	@mkdir -p $(O_DIR)
 
-$(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(SRC) -o $@ -I $(INC_FINAL)
+$(NAME) : $(OBJ_TOTAL)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_TOTAL)
 	@echo "-----------------push_swap compile finished-----------------"
-
-$(BONUS) : $(OBJ_BONUS)
-	$(CC) $(CFLAGS) $(SRC_BONUS) -o $@ -I $(INC_FINAL)
-	@echo "-----------------checker compile finished-----------------"
 
 clean :
 	$(DEL) -r $(O_DIR) $(OBJ_BONUS_DIR)

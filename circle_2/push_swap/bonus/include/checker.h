@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 16:45:56 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:40:11 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/10 12:54:28 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	ft_free_stack(t_stack *stack);
 ------------------------*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_error(void);
-int		ft_atoi(const char *s);
+long	ft_atoi(const char *s);
+int		ft_free(char **str, int i);
 char	**ft_split(char const *str, char c);
 
 #endif

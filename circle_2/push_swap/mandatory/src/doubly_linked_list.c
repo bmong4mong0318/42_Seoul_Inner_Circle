@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:42:01 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:14:17 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/10 12:42:50 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_node	*ft_init_new_node(int num)
 	if (!new_node)
 		ft_error();
 	new_node->data = num;
+	new_node->index = 0;
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	return (new_node);

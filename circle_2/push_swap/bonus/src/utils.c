@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 16:30:34 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:20:06 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/11 16:12:15 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,19 @@ void	ft_error(void)
 	exit(1);
 }
 
-static int	check_error(const char *s)
+static int	check_error_and_sign(const char *s, long *plma)
 {
 	if (!(*s == '-' || *s == '+') && !(*s >= '0' && *s <= '9')
 		&& *s != 32 && !(*s >= 9 && *s <= 13))
 		return (0);
 	if ((*s == '-' || *s == '+') && !(*(s + 1) >= '0' && *(s + 1) <= '9'))
 		return (0);
+	if ((*s == '-') && (*(s + 1) >= '0' && *(s + 1) <= '9'))
+		*plma *= -1;
 	return (1);
 }
 
-int	ft_atoi(const char *s)
+long	ft_atoi(const char *s)
 {
 	long	plma;
 	long	ans;
@@ -50,14 +52,14 @@ int	ft_atoi(const char *s)
 	ans = 0;
 	while (*s)
 	{
-		if (!check_error(s))
+		if (!check_error_and_sign(s, &plma))
 			return (0);
-		if ((*s == '-') && (*(s + 1) >= '0' && *(s + 1) <= '9'))
-				plma *= -1;
 		if (*s >= '0' && *s <= '9')
 		{
 			while (*s >= '0' && *s <= '9')
 			{
+				if (ans < -2147483648 || 2147483647 < ans)
+					return (plma * ans);
 				ans = ans * 10 + (*s++ - '0');
 				if (ans < 0)
 					return ((plma + 1) / (-2));

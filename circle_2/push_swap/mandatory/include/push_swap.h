@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 11:00:19 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:40:13 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/11 16:07:28 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include <stdio.h>
 
 typedef struct s_node
 {
@@ -98,7 +97,8 @@ void	ft_free_stack(t_stack *stack);
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_error(void);
-int		ft_atoi(const char *s);
+long	ft_atoi(const char *s);
+int		ft_free(char **str, int i);
 char	**ft_split(char const *str, char c);
 
 #endif

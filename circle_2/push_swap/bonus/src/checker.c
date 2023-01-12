@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 16:46:15 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:38:30 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/10 13:29:56 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ int	main(int argc, char *argv[])
 	indexing_stack(&a_stack);
 	ft_check_op(&a_stack, &b_stack);
 	ft_free_stack(&a_stack);
-	ft_free_stack(&b_stack);
 }

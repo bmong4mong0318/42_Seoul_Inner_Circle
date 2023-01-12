@@ -288,7 +288,6 @@ int main()
 	int status: 호스트 환경에게 알려줄 종료 값
 	- 정상 종료시 0
 	- 에러로 인한 종료시 0이 아닌 숫자, 대체로 1
-
 반환: x
 
 예시: exit(0)
@@ -305,12 +304,20 @@ int main()
 	pid_t -1 : 실패
 	0 == 자식 프로세스, 새로 생성된 프로세스임
 	0 < 생성된 자식 프로세스 PID
-```
-https://code-lab1.tistory.com/39
 
-- pipe
+예시: ㅁㄴㅇㄹㅁㄴㅇㄹ
+```
+
+- `pipe` : 프로세스 간의 통신(IPC)에서 사용하는 파이프를 생성합니다.
 ```c
-``` 
+헤더: unistd.h
+형태: int pipe(int filedes[2])
+인수: int filedes[2] : 파이프의 입출력 디스크립터
+반환: 
+	0 == 성공,
+	-1 == 실패
+```
+https://badayak.com/entry/C%EC%96%B8%EC%96%B4-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-IPC-%ED%95%A8%EC%88%98-pipe
 
 - unlink
 ```c

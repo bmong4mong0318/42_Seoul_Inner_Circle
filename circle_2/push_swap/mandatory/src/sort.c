@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 15:52:02 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:17:28 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/10 13:20:57 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	sort_four(t_stack *a_stack, t_stack *b_stack)
 	if (!already_sorted(a_stack))
 		sort_three(a_stack, flag);
 	pa(a_stack, b_stack);
-	if (a_stack->top->index == 2)
+	if (a_stack->top->index == 3)
 		ra(a_stack);
 }
 

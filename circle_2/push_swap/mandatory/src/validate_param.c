@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:16:17 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/01 21:10:44 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/11 15:48:42 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,21 @@ int	is_duplicate(int nbr, t_stack *stack)
 void	ft_validate_param(char *argv, t_stack *stack)
 {
 	char	**split_argv;
+	int		i;
 
+	i = -1;
 	split_argv = ft_split(argv, ' ');
-	if (!split_argv)
+	if (!split_argv || !*split_argv)
 		ft_error();
-	while (*split_argv)
+	while (split_argv[++i])
 	{
-		if (!is_nbr(*split_argv))
+		if (!is_nbr(split_argv[i]))
 			ft_error();
-		if (!is_integer(ft_atoi(*split_argv)))
+		if (!is_integer(ft_atoi(split_argv[i])))
 			ft_error();
-		if (!is_duplicate(ft_atoi(*split_argv), stack))
+		if (!is_duplicate(ft_atoi(split_argv[i]), stack))
 			ft_error();
-		ft_push_bottom(stack, ft_init_new_node(ft_atoi(*split_argv)));
-		split_argv++;
+		ft_push_bottom(stack, ft_init_new_node(ft_atoi(split_argv[i])));
 	}
+	ft_free(split_argv, i);
 }

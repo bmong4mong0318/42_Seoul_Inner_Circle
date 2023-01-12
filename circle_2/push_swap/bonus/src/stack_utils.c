@@ -6,7 +6,7 @@
 /*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 19:23:05 by dayun             #+#    #+#             */
-/*   Updated: 2023/01/02 15:19:55 by dayun            ###   ########.fr       */
+/*   Updated: 2023/01/10 12:53:53 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	init_stack(t_stack *stack)
 {
-	stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!stack)
-		ft_error();
 	stack->top = NULL;
 	stack->bottom = NULL;
 	stack->cur = NULL;
@@ -60,13 +57,13 @@ void	generate_stack(char **argv, t_stack *stack)
 void	ft_free_stack(t_stack *stack)
 {
 	int	idx;
+	int	num;
 
 	idx = -1;
-	while (++idx < stack->num_of_data)
+	num = stack->num_of_data;
+	while (++idx < num)
 	{
 		stack->cur = ft_pop_top(stack);
 		free(stack->cur);
 	}
-	free(stack->top);
-	free(stack->bottom);
 }

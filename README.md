@@ -14,7 +14,7 @@
 
 ## Circle_2
 
-- `fract`-ol: 프랙탈 구현하기
+- `fract-ol`: 프랙탈 구현하기
 
 - `pipex`: pipe를 통한 프로세스 간 통신
 

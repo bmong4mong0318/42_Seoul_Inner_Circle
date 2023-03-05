@@ -24,4 +24,4 @@
 
 - `minishell`: 나만의 쉘 만들어보기
 
-- `philosopher` : multiThread, multiProcess
+- `philosopher`: multiThread, multiProcess

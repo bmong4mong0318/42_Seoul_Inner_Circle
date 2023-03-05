@@ -19,3 +19,9 @@
 - `pipex`: pipe를 통한 프로세스 간 통신
 
 - `push_swap`: 정렬 알고리즘과 자료구조
+
+## Circle_3
+
+- `minishell`: 나만의 쉘 만들어보기
+
+- `philosopher` : multiThread, multiProcess

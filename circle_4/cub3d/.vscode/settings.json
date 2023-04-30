@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "cub3d.h": "c",
+    "utils.h": "c",
+    "parsing.h": "c",
+    "__bit_reference": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "unordered_map": "c",
+    "execute.h": "c",
+    "math.h": "c",
+    "hooks.h": "c",
+    "ios": "c",
+    "__locale": "c",
+    "vector.h": "c"
+  }
+}

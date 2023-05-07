@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:49:24 by dayun             #+#    #+#             */
-/*   Updated: 2023/04/30 14:49:27 by dayun            ###   ########.fr       */
+/*   Updated: 2023/05/07 16:42:22 by yundaehyeok      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 640
-#define MINIMAP_SCALE 0.25
 
 #define TEX_WIDTH 64
 #define TEX_HEIGHT 64
 
-#define X_EVENT_KEY_PRESS 2
+#define X_EVENT_move_player 2
 #define X_EVENT_KEY_RELEASE 3
 #define X_EVENT_KEY_EXIT 17
 
@@ -34,16 +33,13 @@
 #define RGB_WHITE 16777215	// 255*65536+255*256+255
 #define RGB_YELLOW 16776960 // 255*65536+255*256+0
 
-enum
-{
-	KEY_W = 13,
-	KEY_A = 0,
-	KEY_S = 1,
-	KEY_D = 2,
-	KEY_ESC = 53,
-	KEY_LEFT = 123,
-	KEY_RIGHT = 124
-};
+#define KEY_W 13
+#define KEY_A 0
+#define KEY_S 1
+#define KEY_D 2
+#define KEY_ESC 53
+#define KEY_LEFT 123
+#define KEY_RIGHT 124
 
 enum
 {
@@ -83,7 +79,7 @@ typedef struct s_wall
 typedef struct s_info
 {
 	t_info_type type;
-	char *key;
+	char *name;
 	char *value;
 } t_info;
 
@@ -127,17 +123,8 @@ typedef struct s_game
 	int buf[WINDOW_HEIGHT][WINDOW_WIDTH];
 	int **texture;
 	int re_buf;
-
-	t_img minimap;
-	t_ui *minimap_data;
-	int miniw;
-	int minih;
-	int gridw;
-	int gridh;
 } t_game;
 
-void paint_grid(t_game *game, int y, int x, int color);
-void paint_minimap(t_game *game);
 int main_loop(t_game *game);
 
 #endif

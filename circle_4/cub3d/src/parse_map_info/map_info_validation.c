@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_info_validation.c                        :+:      :+:    :+:   */
+/*   map_info_validation.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:56:26 by dayun             #+#    #+#             */
-/*   Updated: 2023/04/30 14:56:29 by dayun            ###   ########.fr       */
+/*   Updated: 2023/05/07 14:00:33 by yundaehyeok      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-static t_bool	is_empty_line(char *line)
+static t_bool is_empty_line(char *line)
 {
-	t_bool	result;
-	char	*trimmed_line;
+	t_bool result;
+	char *trimmed_line;
 
 	result = FALSE;
 	trimmed_line = ft_strtrim(line, " \n");
@@ -26,7 +26,7 @@ static t_bool	is_empty_line(char *line)
 	return (result);
 }
 
-static t_bool	is_all_map_info_set(t_game *game)
+static t_bool is_all_map_info_set(t_game *game)
 {
 	if (game->ceiling == NULL)
 		return (FALSE);
@@ -43,9 +43,9 @@ static t_bool	is_all_map_info_set(t_game *game)
 	return (TRUE);
 }
 
-static t_bool	is_map_content(char *line)
+static t_bool is_map_content(char *line)
 {
-	int		idx;
+	int idx;
 
 	idx = 0;
 	while (line[idx] != '\0')
@@ -68,31 +68,31 @@ static t_bool	is_map_content(char *line)
 	return (TRUE);
 }
 
-void	check_map_info_validation(t_game *game)
+void map_info_validation(t_game *game)
 {
-	int		count;
-	char	*line;
+	int count;
+	char *line;
 
 	count = 0;
 	while (count < 6)
 	{
 		line = get_next_line(game->map_fd);
 		if (line == NULL)
-			break ;
+			break;
 		if (is_empty_line(line) == FALSE)
 		{
 			if (is_map_content(line) == TRUE)
 			{
 				free(line);
-				break ;
+				break;
 			}
-			count += process_line(line, game);
+			count += input_line_info(line, game);
 		}
 		game->line_idx += 1;
 		free(line);
 	}
 	if (count != 6)
-		throw_error(INVALID_MAP_INFO, NULL, game);
+		error_exit("Map error", NULL, game);
 	if (is_all_map_info_set(game) == FALSE)
-		throw_error(NOT_ENOUGH_MAP_INFO, NULL, game);
+		error_exit("Map error", NULL, game);
 }

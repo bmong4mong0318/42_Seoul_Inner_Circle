@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_floor_ceiling_info.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:56:40 by dayun             #+#    #+#             */
-/*   Updated: 2023/04/30 14:56:43 by dayun            ###   ########.fr       */
+/*   Updated: 2023/05/07 16:39:47 by yundaehyeok      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "utils.h"
 #include "parsing.h"
 
-static t_bool	is_valid_separator_count(char *line)
+t_bool is_valid_separator_count(char *line)
 {
-	int		idx;
-	int		count;
-	char	*trimmed_line;
+	int idx;
+	int count;
+	char *trimmed_line;
 
 	idx = 0;
 	count = 0;
@@ -35,22 +35,22 @@ static t_bool	is_valid_separator_count(char *line)
 	return (FALSE);
 }
 
-static void	check_space_in_value(char *value, t_game *game)
+void check_space_in_value(char *value, t_game *game)
 {
-	char	**value_split;
+	char **value_split;
 
 	value_split = ft_split(value, ' ');
-	if (get_count_of_kv_pair(value_split) != 1)
-		throw_error(INVALID_RGB_FORMAT, value, game);
+	if (number_of_str(value_split) != 1)
+		error_exit("Invalid RGB format", value, game);
 	free_all(value_split);
 }
 
-static t_bool	is_valid_rgb_value(char **values, t_game *game)
+t_bool is_valid_rgb_value(char **values, t_game *game)
 {
-	int		idx;
-	int		value_idx;
-	int		result;
-	char	*value;
+	int idx;
+	int value_idx;
+	int result;
+	char *value;
 
 	idx = 0;
 	while (values[idx] != NULL)
@@ -73,10 +73,10 @@ static t_bool	is_valid_rgb_value(char **values, t_game *game)
 	return (TRUE);
 }
 
-static unsigned char	save_rgb_value(char *line)
+unsigned char save_rgb_value(char *line)
 {
-	int		result;
-	char	*trimmed_line;
+	int result;
+	char *trimmed_line;
 
 	trimmed_line = ft_strtrim(line, " ");
 	result = ft_atoi(trimmed_line);
@@ -84,30 +84,22 @@ static unsigned char	save_rgb_value(char *line)
 	return ((unsigned char)result);
 }
 
-void	save_floor_ceiling_info(t_info *line_info, t_game *game)
+void save_floor_ceiling_info(t_info *info, t_game *game)
 {
-	t_rgb	*rgb;
-	char	**values;
+	t_rgb *rgb;
+	char **values;
 
-	if (is_valid_separator_count(line_info->value) == FALSE)
-		throw_error(INVALID_RGB_FORMAT, line_info->value, game);
-	values = ft_split(line_info->value, ',');
-	if (get_count_of_kv_pair(values) != 3)
-		throw_error(INVALID_RGB_FORMAT, line_info->value, game);
-	if (is_valid_rgb_value(values, game) == FALSE)
-		throw_error(INVALID_RGB_VALUE, line_info->value, game);
-	if (ft_strcmp(line_info->key, "F") == 0 && game->floor != NULL)
-		throw_error(DUPLICATED_MAP_INFO, line_info->key, game);
-	if (ft_strcmp(line_info->key, "C") == 0 && game->ceiling != NULL)
-		throw_error(DUPLICATED_MAP_INFO, line_info->key, game);
+	values = error_check_and_split(info, game);
 	rgb = malloc(sizeof(t_rgb));
+	if (rgb == NULL)
+		error_exit("malloc fail", NULL, game);
 	rgb->r = save_rgb_value(values[0]);
 	rgb->g = save_rgb_value(values[1]);
 	rgb->b = save_rgb_value(values[2]);
 	rgb->color = (rgb->r << 16) | (rgb->g << 8) | rgb->b;
-	if (ft_strcmp(line_info->key, "F") == 0)
+	if (ft_strcmp(info->name, "F") == 0)
 		game->floor = rgb;
-	else if (ft_strcmp(line_info->key, "C") == 0)
+	else if (ft_strcmp(info->name, "C") == 0)
 		game->ceiling = rgb;
 	free_all(values);
 }

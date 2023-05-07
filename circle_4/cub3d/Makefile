@@ -6,12 +6,13 @@ SRC_DIR						:=	src/
 SRC_MAIN					:=	main.c
 
 SRC_INIT_DIR				:=	init/
-SRC_INIT_FILES				:=	init.c
+SRC_INIT_FILES				:=	init.c \
+								init_texture.c
 
 SRC_EXECUTE_DIR				:=	execute/
-SRC_EXECUTE_FILES			:=	calc.c					\
+SRC_EXECUTE_FILES			:=	calculation.c			\
 								set_wall_dist.c			\
-								draw.c
+								paint.c
 
 SRC_HOOKS_DIR				:=	hooks/
 SRC_HOOKS_FILES				:=	hooks.c								\
@@ -24,7 +25,7 @@ SRC_UTILS_FILES				:=	error.c								\
 								vector.c
 
 SRC_PARSING_MAP_DIR			:=	parse_map/
-SRC_PARSING_MAP_FILES		:=	check_map_validation.c						\
+SRC_PARSING_MAP_FILES		:=	map_validation.c						\
 								is_valid_line.c						\
 								is_one_player.c						\
 								save_map.c							\
@@ -32,9 +33,9 @@ SRC_PARSING_MAP_FILES		:=	check_map_validation.c						\
 								parse_map_utils.c
 
 SRC_PARSING_MAP_INFO_DIR	:=	parse_map_info/
-SRC_PARSING_MAP_INFO_FILES	:=	check_map_info_validation.c				\
+SRC_PARSING_MAP_INFO_FILES	:=	map_info_validation.c				\
 								map_info_utils.c					\
-								process_line.c						\
+								input_line_info.c						\
 								save_floor_ceiling_info.c
 
 SRC_FILES					:=	$(SRC_MAIN)	\

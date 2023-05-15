@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:55:42 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 15:07:37 by yundaehyeok      ###   ########.fr       */
+/*   Updated: 2023/05/15 16:49:42 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <fcntl.h>
 
-void init_game(t_game *game, char *file)
+void	init_game(t_game *game, char *file)
 {
 	game->wall.no = NULL;
 	game->wall.so = NULL;
@@ -40,7 +40,7 @@ void init_game(t_game *game, char *file)
 	game->texture[3] = ft_calloc(TEX_HEIGHT * TEX_WIDTH, sizeof(int));
 }
 
-void init_camera_angle(t_game *game)
+void	init_camera_angle(t_game *game)
 {
 	if (game->player == 'W')
 	{
@@ -64,11 +64,11 @@ void init_camera_angle(t_game *game)
 	}
 }
 
-void init_mlx_setting(t_game *game)
+void	init_mlx_setting(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	game->img.img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp,
-											  &game->img.size_l, &game->img.endian);
+	game->img.data = (int *)mlx_get_data_addr(game->img.img, &game->img.bpp, \
+		&game->img.size_l, &game->img.endian);
 }

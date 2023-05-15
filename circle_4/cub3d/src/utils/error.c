@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 14:56:46 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 14:26:52 by yundaehyeok      ###   ########.fr       */
+/*   Created: 2023/05/15 16:57:54 by dayun             #+#    #+#             */
+/*   Updated: 2023/05/15 16:58:07 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	print_error(char *msg, char *arg)
 {
-	ft_putstr_fd("Error\n❌ ", STDERR_FILENO);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	ft_putstr_fd(msg, STDERR_FILENO);
 	if (arg != NULL)
 	{

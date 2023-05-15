@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_info_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:56:31 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 16:35:08 by yundaehyeok      ###   ########.fr       */
+/*   Updated: 2023/05/15 16:56:20 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "utils.h"
 #include <fcntl.h>
 
-t_bool is_valid_file_extension(char *str)
+t_bool	is_valid_file_extension(char *str)
 {
-	int str_len;
+	int	str_len;
 
 	str_len = ft_strlen(str);
 	if (ft_strcmp(&str[str_len - 4], ".cub") != 0)
@@ -26,9 +26,9 @@ t_bool is_valid_file_extension(char *str)
 		return (TRUE);
 }
 
-t_bool is_file_openable(char *file)
+t_bool	is_file_openable(char *file)
 {
-	int fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY, 0644);
 	if (fd == ERROR)
@@ -37,9 +37,9 @@ t_bool is_file_openable(char *file)
 	return (TRUE);
 }
 
-int number_of_str(char **info_value)
+int	number_of_str(char **info_value)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (info_value[count] != NULL)
@@ -47,9 +47,9 @@ int number_of_str(char **info_value)
 	return (count);
 }
 
-char **error_check_and_split(t_info *info, t_game *game)
+char	**error_check_and_split(t_info *info, t_game *game)
 {
-	char **values;
+	char	**values;
 
 	if (is_valid_separator_count(info->value) == FALSE)
 		error_exit("Invalid RGB format", info->value, game);

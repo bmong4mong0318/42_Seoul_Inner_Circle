@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_floor_ceiling_info.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 14:56:40 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 16:39:47 by yundaehyeok      ###   ########.fr       */
+/*   Created: 2023/05/15 16:57:21 by dayun             #+#    #+#             */
+/*   Updated: 2023/05/15 17:01:32 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "utils.h"
 #include "parsing.h"
 
-t_bool is_valid_separator_count(char *line)
+t_bool	is_valid_separator_count(char *line)
 {
-	int idx;
-	int count;
-	char *trimmed_line;
+	int		idx;
+	int		count;
+	char	*trimmed_line;
 
 	idx = 0;
 	count = 0;
@@ -35,9 +35,9 @@ t_bool is_valid_separator_count(char *line)
 	return (FALSE);
 }
 
-void check_space_in_value(char *value, t_game *game)
+void	check_space_in_value(char *value, t_game *game)
 {
-	char **value_split;
+	char	**value_split;
 
 	value_split = ft_split(value, ' ');
 	if (number_of_str(value_split) != 1)
@@ -45,12 +45,12 @@ void check_space_in_value(char *value, t_game *game)
 	free_all(value_split);
 }
 
-t_bool is_valid_rgb_value(char **values, t_game *game)
+t_bool	is_valid_rgb_value(char **values, t_game *game)
 {
-	int idx;
-	int value_idx;
-	int result;
-	char *value;
+	int		idx;
+	int		value_idx;
+	int		result;
+	char	*value;
 
 	idx = 0;
 	while (values[idx] != NULL)
@@ -73,10 +73,10 @@ t_bool is_valid_rgb_value(char **values, t_game *game)
 	return (TRUE);
 }
 
-unsigned char save_rgb_value(char *line)
+unsigned char	save_rgb_value(char *line)
 {
-	int result;
-	char *trimmed_line;
+	int		result;
+	char	*trimmed_line;
 
 	trimmed_line = ft_strtrim(line, " ");
 	result = ft_atoi(trimmed_line);
@@ -84,10 +84,10 @@ unsigned char save_rgb_value(char *line)
 	return ((unsigned char)result);
 }
 
-void save_floor_ceiling_info(t_info *info, t_game *game)
+void	save_floor_ceiling_info(t_info *info, t_game *game)
 {
-	t_rgb *rgb;
-	char **values;
+	t_rgb	*rgb;
+	char	**values;
 
 	values = error_check_and_split(info, game);
 	rgb = malloc(sizeof(t_rgb));

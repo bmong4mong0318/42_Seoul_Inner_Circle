@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:55:36 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 15:04:31 by yundaehyeok      ###   ########.fr       */
+/*   Updated: 2023/05/15 16:47:59 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "hooks.h"
 #include <stdio.h>
 
-int exit_hook(t_game *game)
+int	exit_hook(t_game *game)
 {
 	mlx_destroy_window(game->mlx, game->win);
 	close(game->map_fd);
@@ -22,7 +22,7 @@ int exit_hook(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
-int move_player(int key, t_game *game)
+int	move_player(int key, t_game *game)
 {
 	if (key == KEY_W || key == KEY_A || key == KEY_S || key == KEY_D)
 		handle_player_move(key, game);
@@ -30,7 +30,5 @@ int move_player(int key, t_game *game)
 		handle_camera_rotation(key, game);
 	else if (key == KEY_ESC)
 		exit_hook(game);
-	// mlx_clear_window(game->mlx, game->win);
-	// main_loop(game);
 	return (0);
 }

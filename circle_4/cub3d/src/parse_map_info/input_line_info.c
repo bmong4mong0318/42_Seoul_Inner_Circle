@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_line_info.c                                     :+:      :+:    :+:   */
+/*   input_line_info.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 14:56:36 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/07 15:15:40 by yundaehyeok      ###   ########.fr       */
+/*   Created: 2023/05/15 16:52:10 by dayun             #+#    #+#             */
+/*   Updated: 2023/05/15 17:02:09 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "utils.h"
 
-static char *strjoin_values(char *name, char *line, t_info_type type,
+static char	*strjoin_values(char *name, char *line, t_info_type type,
 							t_game *game)
 {
-	char *start;
-	char *buffer;
-	char **argv;
+	char	*start;
+	char	*buffer;
+	char	**argv;
 
 	start = ft_strnstr(line, name, ft_strlen(line));
 	if (type == FLOOR_OR_CEILING)
@@ -42,10 +42,10 @@ static char *strjoin_values(char *name, char *line, t_info_type type,
 	return (buffer);
 }
 
-static void filter_info_type(t_info *info, char **info_value, t_game *game)
+static void	filter_info_type(t_info *info, char **info_value, t_game *game)
 {
-	if (ft_strcmp(info_value[NAME], "F") == 0 ||
-		ft_strcmp(info_value[NAME], "C") == 0)
+	if (ft_strcmp(info_value[NAME], "F") == 0 \
+		|| ft_strcmp(info_value[NAME], "C") == 0)
 		info->type = FLOOR_OR_CEILING;
 	else if (ft_strcmp(info_value[NAME], "NO") == 0)
 		info->type = NO;
@@ -59,21 +59,20 @@ static void filter_info_type(t_info *info, char **info_value, t_game *game)
 		error_exit("Map character error", info_value[NAME], game);
 }
 
-static t_info *check_info(char *line, t_game *game)
+static t_info	*check_info(char *line, t_game *game)
 {
-	t_info *info;
-	char *trimmed_line;
-	char **info_value;
+	t_info	*info;
+	char	*trimmed_line;
+	char	**info_value;
 
 	trimmed_line = ft_strtrim(line, " \n");
 	info_value = ft_split(trimmed_line, ' ');
 	info = malloc(sizeof(t_info));
 	filter_info_type(info, info_value, game);
 	info->name = ft_strdup(info_value[NAME]);
-	// TODO: 여기 뭐야?
 	if (number_of_str(info_value) != 2)
-		info->value = strjoin_values(info_value[NAME],
-									 trimmed_line, info->type, game);
+		info->value = strjoin_values(info_value[NAME], \
+			trimmed_line, info->type, game);
 	else
 		info->value = ft_strdup(info_value[VALUE]);
 	free(trimmed_line);
@@ -81,9 +80,9 @@ static t_info *check_info(char *line, t_game *game)
 	return (info);
 }
 
-static void save_wall_info(t_info *info, t_game *game)
+static void	save_wall_info(t_info *info, t_game *game)
 {
-	char *trimmed_line;
+	char	*trimmed_line;
 
 	trimmed_line = ft_strtrim(info->value, " \n");
 	if (ft_strcmp(trimmed_line + (ft_strlen(trimmed_line) - 4), ".xpm") != 0)
@@ -102,9 +101,9 @@ static void save_wall_info(t_info *info, t_game *game)
 		error_exit("Map error", trimmed_line, game);
 }
 
-int input_line_info(char *line, t_game *game)
+int	input_line_info(char *line, t_game *game)
 {
-	t_info *info;
+	t_info	*info;
 
 	info = check_info(line, game);
 	if (info != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yundaehyeok <yundaehyeok@student.42.fr>    +#+  +:+       +#+        */
+/*   By: dayun <dayun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 14:49:00 by dayun             #+#    #+#             */
-/*   Updated: 2023/05/15 14:33:18 by yundaehyeok      ###   ########.fr       */
+/*   Updated: 2023/05/15 16:45:12 by dayun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include "execute.h"
 #include <math.h>
 
-t_vec set_side_dist(t_calc *calc, t_vec pos)
+t_vec	set_side_dist(t_calc *calc, t_vec pos)
 {
-	t_vec side_dist;
+	t_vec	side_dist;
 
 	if (calc->ray_dir.x < 0)
 	{
@@ -43,7 +43,7 @@ t_vec set_side_dist(t_calc *calc, t_vec pos)
 	return (side_dist);
 }
 
-int set_texture(t_calc calc)
+int	set_texture(t_calc calc)
 {
 	if (calc.side == 0)
 	{
@@ -61,7 +61,7 @@ int set_texture(t_calc calc)
 	}
 }
 
-void set_drawing_line(t_calc *calc)
+void	set_drawing_line(t_calc *calc)
 {
 	calc->line_height = (int)(WINDOW_HEIGHT / calc->perp_wall_dist);
 	calc->draw_start = -(calc->line_height) / 2 + WINDOW_HEIGHT / 2;
@@ -72,10 +72,10 @@ void set_drawing_line(t_calc *calc)
 		calc->draw_end = WINDOW_HEIGHT - 1;
 }
 
-int set_tex_x(t_calc calc, t_vec pos)
+int	set_tex_x(t_calc calc, t_vec pos)
 {
-	int tex_x;
-	double wall_x;
+	int		tex_x;
+	double	wall_x;
 
 	if (calc.side == HORIZONTAL)
 		wall_x = pos.y + calc.perp_wall_dist * calc.ray_dir.y;
@@ -90,10 +90,10 @@ int set_tex_x(t_calc calc, t_vec pos)
 	return (tex_x);
 }
 
-void calculation(t_game *game)
+void	calculation(t_game *game)
 {
-	int x;
-	t_calc calc;
+	int		x;
+	t_calc	calc;
 
 	x = 0;
 	paint_background(game);
@@ -102,8 +102,8 @@ void calculation(t_game *game)
 		calc.camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
 		calc.ray_dir = vec_add(game->dir, vec_mul(game->plane, calc.camera_x));
 		calc.map = double_to_int(game->pos);
-		calc.delta_dist = vec_new(fabs(1 / calc.ray_dir.x),
-								  fabs(1 / calc.ray_dir.y));
+		calc.delta_dist = vec_new(fabs(1 / calc.ray_dir.x), \
+			fabs(1 / calc.ray_dir.y));
 		calc.side_dist = set_side_dist(&calc, game->pos);
 		calc.perp_wall_dist = set_wall_dist(&calc, game, game->pos);
 		set_drawing_line(&calc);

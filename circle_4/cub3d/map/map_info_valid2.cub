@@ -4,7 +4,7 @@ SO           ./images/SO.xpm
 
   NO     ./images/NO.xpm
 
-F       00,    153,15
+F       00,153,15
 EA ./images/EA.xpm
 
 C 255,255,255

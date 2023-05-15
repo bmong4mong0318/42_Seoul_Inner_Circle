@@ -25,7 +25,7 @@ SRC_UTILS_FILES				:=	error.c								\
 								vector.c
 
 SRC_PARSING_MAP_DIR			:=	parse_map/
-SRC_PARSING_MAP_FILES		:=	map_validation.c						\
+SRC_PARSING_MAP_FILES		:=	map_validation.c					\
 								is_valid_line.c						\
 								is_one_player.c						\
 								save_map.c							\
@@ -35,7 +35,7 @@ SRC_PARSING_MAP_FILES		:=	map_validation.c						\
 SRC_PARSING_MAP_INFO_DIR	:=	parse_map_info/
 SRC_PARSING_MAP_INFO_FILES	:=	map_info_validation.c				\
 								map_info_utils.c					\
-								input_line_info.c						\
+								input_line_info.c					\
 								save_floor_ceiling_info.c
 
 SRC_FILES					:=	$(SRC_MAIN)	\
@@ -101,13 +101,6 @@ $(NAME) : $(OBJS)
 	$(MAKE) -j4 -C $(MLX_DIR)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIB_FLAGS) $(MLX_FLAGS) -L $(MLX_DIR)
 
-# $(OBJ_DIR):
-# 	mkdir -p $(OBJ_DIR)
-# 	mkdir -p $(OBJ_DIR)$(SRC_UTILS_DIR)
-# 	mkdir -p $(OBJ_DIR)$(SRC_PARSING_MAP_DIR)
-# 	mkdir -p $(OBJ_DIR)$(SRC_PARSING_MAP_INFO_DIR)
-
-# $(OBJ_DIR)%.o : $(SRCS) | $(OBJ_DIR)
 $(OBJS): $(OBJ_DIR)%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE) -I$(LIB_DIR)

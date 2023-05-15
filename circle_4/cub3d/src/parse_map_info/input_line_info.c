@@ -70,6 +70,7 @@ static t_info *check_info(char *line, t_game *game)
 	info = malloc(sizeof(t_info));
 	filter_info_type(info, info_value, game);
 	info->name = ft_strdup(info_value[NAME]);
+	// TODO: 여기 뭐야?
 	if (number_of_str(info_value) != 2)
 		info->value = strjoin_values(info_value[NAME],
 									 trimmed_line, info->type, game);
